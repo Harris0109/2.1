@@ -1,9 +1,8 @@
 package com.example.moneymate
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 class SignUpActivity : AppCompatActivity() {
@@ -12,24 +11,35 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-        val emailInput = findViewById<EditText>(R.id.emailInput)
-        val passwordInput = findViewById<EditText>(R.id.passwordInput)
+        val nameInput = findViewById<EditText>(R.id.nameInput)
+        val emailInput = findViewById<EditText>(R.id.signupEmailInput)
+        val passwordInput = findViewById<EditText>(R.id.signupPasswordInput)
         val confirmPasswordInput = findViewById<EditText>(R.id.confirmPasswordInput)
         val signupButton = findViewById<Button>(R.id.signupButton)
+        val loginText = findViewById<TextView>(R.id.loginText)
 
         signupButton.setOnClickListener {
+            val name = nameInput.text.toString().trim()
             val email = emailInput.text.toString().trim()
             val password = passwordInput.text.toString().trim()
             val confirmPassword = confirmPasswordInput.text.toString().trim()
 
-            if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            if (name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             } else if (password != confirmPassword) {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show()
-                // You can navigate or clear fields here if needed
+                Toast.makeText(this, "Sign Up Successful", Toast.LENGTH_SHORT).show()
+                // Redirect to Main Activity or Login
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
+        }
+
+        loginText.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
     }
 }
+
