@@ -19,9 +19,6 @@
             android:name=".UserInfo"
             android:exported="false" />
         <activity
-            android:name=".UserInfoActivity"
-            android:exported="false" />
-        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
