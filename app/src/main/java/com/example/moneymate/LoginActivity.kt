@@ -35,7 +35,8 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 // Handle login process here
                 Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, WelcomeActivity::class.java)
+                intent.putExtra("user_name", email)
                 startActivity(intent)
                 finish()
             }
