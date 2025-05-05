@@ -1,0 +1,108 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <!-- Back Arrow -->
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_back"
+            android:layout_gravity="start"
+            android:contentDescription="Back" />
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="32dp">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_goal"
+                android:contentDescription="Goal Icon"
+                android:backgroundTint="#007AFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Goals"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_marginStart="16dp" />
+        </LinearLayout>
+
+        <!-- Goal Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter Goal name"
+            android:textSize="18sp"
+            android:layout_marginTop="40dp" />
+
+        <EditText
+            android:id="@+id/goalName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="name..."
+            android:background="@drawable/input_bg"
+            android:padding="12dp" />
+
+        <!-- Maximum Amount -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Maximum Amount"
+            android:textSize="18sp"
+            android:layout_marginTop="24dp" />
+
+        <EditText
+            android:id="@+id/maxAmount"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Enter the max amount"
+            android:inputType="number"
+            android:background="@drawable/input_bg"
+            android:padding="12dp" />
+
+        <!-- Minimum Amount -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Minimum Amount"
+            android:textSize="18sp"
+            android:layout_marginTop="24dp" />
+
+        <EditText
+            android:id="@+id/minAmount"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Enter the min amount"
+            android:inputType="number"
+            android:background="@drawable/input_bg"
+            android:padding="12dp" />
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/addGoalsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ADD GOALS"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/button_bg" />
+
+
+    </LinearLayout>
+</ScrollView>

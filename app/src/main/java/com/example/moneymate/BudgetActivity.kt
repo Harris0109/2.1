@@ -16,10 +16,17 @@ class BudgetActivity : AppCompatActivity() {
         val welcomeText = findViewById<TextView>(R.id.welcomeText)
         welcomeText.text = "Welcome, $userName!"
 
-        // Set Button Click to open CreateCategoryActivity
+        // Button to open CreateCategoryActivity
         val btnCreateCategory = findViewById<Button>(R.id.btnCreateCategory)
         btnCreateCategory.setOnClickListener {
             val intent = Intent(this, CreateCategoryActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Button to open GoalsActivity
+        val btnSetMonthlyGoals = findViewById<Button>(R.id.btnSetMonthlyGoals)
+        btnSetMonthlyGoals.setOnClickListener {
+            val intent = Intent(this, GoalsActivity::class.java)
             startActivity(intent)
         }
     }
