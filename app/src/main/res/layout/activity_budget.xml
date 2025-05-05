@@ -74,12 +74,12 @@
         android:id="@+id/btnCreateCategory"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#3366FF"
         android:text="Create Category"
+        android:layout_marginTop="20dp"
         android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="#3366FF"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/welcomeText" />
 
     <Button
