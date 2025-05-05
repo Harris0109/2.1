@@ -7,7 +7,8 @@
     android:background="@android:color/white"
     tools:context=".WelcomeActivity">
 
-    <!-- Success Icon -->
+
+<!-- Success Icon -->
     <ImageView
         android:id="@+id/successIcon"
         android:layout_width="100dp"
