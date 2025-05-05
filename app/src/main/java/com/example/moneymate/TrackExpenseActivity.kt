@@ -65,5 +65,14 @@ class TrackExpenseActivity : AppCompatActivity() {
             Toast.makeText(this, "Expense submitted!", Toast.LENGTH_SHORT).show()
             // You can store or send the data here
         }
+
+        // Log out text returns to sign-in
+        val logoutText = findViewById<TextView>(R.id.logout)
+        logoutText.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
     }
 }

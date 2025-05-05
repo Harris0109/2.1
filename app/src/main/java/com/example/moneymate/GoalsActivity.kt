@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import android.widget.TextView
 
 class GoalsActivity : AppCompatActivity() {
 
@@ -15,6 +16,7 @@ class GoalsActivity : AppCompatActivity() {
     private lateinit var minAmountEditText: EditText
     private lateinit var addGoalsButton: Button
     private lateinit var backArrow: ImageView
+    private lateinit var logoutTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +28,7 @@ class GoalsActivity : AppCompatActivity() {
         minAmountEditText = findViewById(R.id.minAmount)
         addGoalsButton = findViewById(R.id.addGoalsButton)
         backArrow = findViewById(R.id.backArrow)
+        logoutTextView = findViewById(R.id.logout)
 
         // Add Goals button logic
         addGoalsButton.setOnClickListener {
@@ -49,5 +52,15 @@ class GoalsActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        // Log out text returns to logo
+        val logoutText = findViewById<TextView>(R.id.logout)
+        logoutText.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
+
     }
 }

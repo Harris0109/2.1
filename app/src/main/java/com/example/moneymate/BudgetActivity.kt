@@ -36,6 +36,15 @@ class BudgetActivity : AppCompatActivity() {
             val intent = Intent(this, TrackExpenseActivity::class.java)
             startActivity(intent)
         }
+
+        // Log out text returns to logo
+        val logoutText = findViewById<TextView>(R.id.logoutText)
+        logoutText.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
     }
 }
 
