@@ -31,8 +31,11 @@ class SignUpActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Sign Up Successful", Toast.LENGTH_SHORT).show()
                 // Redirect to Main Activity or Login
-                startActivity(Intent(this, MainActivity::class.java))
+                val intent = Intent(this, WelcomeActivity::class.java)
+                intent.putExtra("user_name", name) // send the name entered during signup
+                startActivity(intent)
                 finish()
+
             }
         }
 
