@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signupLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".SignUpActivity">
+
+    <!-- Header -->
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/loginText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LOGIN"
+            android:layout_marginEnd="40dp"
+            android:textColor="#888888"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/signupTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SIGN UP"
+            android:textSize="20sp"
+            android:textColor="#3366FF"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Name & Surname -->
+    <EditText
+        android:id="@+id/nameInput"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/input_bg"
+        android:hint="Full Name"
+        android:padding="16dp"
+        android:textColorHint="#999999"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header" />
+
+    <!-- Email -->
+    <EditText
+        android:id="@+id/signupEmailInput"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:hint="Email"
+        android:layout_marginStart="32dp"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/input_bg"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:padding="16dp"
+        android:textColorHint="#999999"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameInput" />
+
+    <!-- Password -->
+    <EditText
+        android:id="@+id/signupPasswordInput"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:hint="Password"
+        android:layout_marginStart="32dp"
+        android:inputType="textPassword"
+        android:background="@drawable/password_bg"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:padding="16dp"
+        android:textColorHint="#999999"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signupEmailInput" />
+
+    <!-- Confirm Password -->
+    <EditText
+        android:id="@+id/confirmPasswordInput"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:hint="Confirm Password"
+        android:padding="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:textColorHint="#999999"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/password_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signupPasswordInput" />
+
+    <!-- Sign Up Button -->
+    <Button
+        android:id="@+id/signupButton"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="Sign Up"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#3366FF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="32dp"
+        app:layout_constraintTop_toBottomOf="@id/confirmPasswordInput" />
+
+    <!-- OR -->
+    <TextView
+        android:id="@+id/orText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="OR"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signupButton" />
+
+    <!-- Social Login -->
+    <LinearLayout
+        android:id="@+id/socialLoginLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/orText">
+
+        <!-- Apple -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="Apple login"
+                android:src="@drawable/ic_apple" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Apple"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Google -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="Google login"
+                android:src="@drawable/ic_google" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Google"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

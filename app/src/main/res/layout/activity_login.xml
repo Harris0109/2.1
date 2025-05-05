@@ -36,6 +36,7 @@
             android:text="SIGN UP"
             android:textSize="20sp"
             android:textColor="#888888" />
+
     </LinearLayout>
 
     <!-- Email Input -->
