@@ -29,6 +29,13 @@ class BudgetActivity : AppCompatActivity() {
             val intent = Intent(this, GoalsActivity::class.java)
             startActivity(intent)
         }
+
+        // Button to open TrackExpenseActivity
+        val btnAddExpense = findViewById<Button>(R.id.btnAddExpense)
+        btnAddExpense.setOnClickListener {
+            val intent = Intent(this, TrackExpenseActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
 

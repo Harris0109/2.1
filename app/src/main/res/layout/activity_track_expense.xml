@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Top Row -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:id="@+id/backArrow"
+                android:layout_width="30dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_arrow_back"
+                android:contentDescription="back" />
+
+            <View
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:text="Log out"
+                android:textColor="#007AFF"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginEnd="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_default_profile"
+                android:contentDescription="Profile" />
+        </LinearLayout>
+
+
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_expense"
+                android:contentDescription="Expense Icon" />
+
+            <TextView
+                android:text="Track your expense"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:textColor="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- Expense Amount -->
+        <EditText
+            android:id="@+id/amountInput"
+            android:hint="Enter expense amount"
+            android:background="@drawable/input_bg"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp" />
+
+        <!-- Date -->
+        <TextView
+            android:text="Select the date of the expense"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/dateInput"
+            android:hint="Select date"
+            android:background="@drawable/input_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false" />
+
+        <!-- Start Time -->
+        <EditText
+            android:id="@+id/startTimeInput"
+            android:hint="Start time"
+            android:background="@drawable/input_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:focusable="false" />
+
+        <!-- End Time -->
+        <EditText
+            android:id="@+id/endTimeInput"
+            android:hint="End time"
+            android:background="@drawable/input_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:focusable="false" />
+
+        <!-- Description -->
+        <EditText
+            android:id="@+id/descriptionInput"
+            android:hint="Description"
+            android:background="@drawable/input_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" />
+
+        <!-- Category -->
+        <EditText
+            android:id="@+id/categoryInput"
+            android:hint="Category"
+            android:background="@drawable/input_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" />
+
+        <!-- Upload Slip -->
+        <Button
+            android:id="@+id/uploadSlipButton"
+            android:text="Upload Expense Slip"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#007AFF"
+            android:textColor="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Submit -->
+        <Button
+            android:id="@+id/submitExpenseButton"
+            android:text="SUBMIT EXPENSE"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/button_bg"
+            android:textColor="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</ScrollView>
