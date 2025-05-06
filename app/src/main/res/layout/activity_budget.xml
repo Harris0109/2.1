@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:padding="16dp">
+
+    <!-- back icon -->
+    <ImageView
+        android:id="@+id/backArrow"
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:contentDescription="back"
+        android:src="@drawable/ic_arrow_back"
+        tools:ignore="MissingConstraints" />
 
     <!-- Top Row: Logo and Logout -->
     <LinearLayout
@@ -17,13 +27,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/logoIcon"
-            android:layout_width="91dp"
-            android:layout_height="129dp"
-            android:contentDescription="App Logo"
-            android:src="@drawable/logo" />
 
         <View
             android:layout_width="0dp"
@@ -88,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:backgroundTint="#3366FF"
-        android:text="Add Expense"
+        android:text="Track Expense"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
