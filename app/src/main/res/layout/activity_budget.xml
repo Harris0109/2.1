@@ -9,12 +9,13 @@
 
     <!-- back icon -->
     <ImageView
-        android:id="@+id/backArrow"
-        android:layout_width="30dp"
-        android:layout_height="50dp"
-        android:contentDescription="back"
-        android:src="@drawable/ic_arrow_back"
-        tools:ignore="MissingConstraints" />
+    android:id="@+id/backArrow"
+    android:layout_width="30dp"
+    android:layout_height="50dp"
+    android:src="@drawable/ic_arrow_back"
+    android:contentDescription="back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <!-- Top Row: Logo and Logout -->
     <LinearLayout
