@@ -126,6 +126,7 @@
             android:id="@+id/addGoalsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#3366FF"
             android:text="ADD GOALS"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
