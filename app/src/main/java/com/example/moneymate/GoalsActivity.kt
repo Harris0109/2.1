@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 
@@ -14,7 +15,8 @@ class GoalsActivity : AppCompatActivity() {
     private lateinit var maxAmountEditText: EditText
     private lateinit var minAmountEditText: EditText
     private lateinit var addGoalsButton: Button
-    private lateinit var backArrow: ImageView
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +27,7 @@ class GoalsActivity : AppCompatActivity() {
         maxAmountEditText = findViewById(R.id.maxAmount)
         minAmountEditText = findViewById(R.id.minAmount)
         addGoalsButton = findViewById(R.id.addGoalsButton)
-        backArrow = findViewById(R.id.backArrow)
+
 
         // Add Goals button logic
         addGoalsButton.setOnClickListener {
@@ -46,6 +48,14 @@ class GoalsActivity : AppCompatActivity() {
         val backArrow = findViewById<ImageView>(R.id.backArrow)
         backArrow.setOnClickListener {
             val intent = Intent(this, BudgetActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        // Back arrow returns to Main
+        val logout = findViewById<TextView>(R.id.logout)
+        logout.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }

@@ -12,15 +12,18 @@ class CategorySummaryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_summary)
 
-        val backArrow: ImageView = findViewById(R.id.backArrow)
-        val logout: TextView = findViewById(R.id.logout)
-
-        backArrow.setOnClickListener {
+        // Back arrow returns to Main
+        val logout = findViewById<TextView>(R.id.logout)
+        logout.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
             finish()
         }
 
-        logout.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+        // Back arrow returns to dashboard
+        val backArrow = findViewById<ImageView>(R.id.backArrow)
+        backArrow.setOnClickListener {
+            val intent = Intent(this, BudgetActivity::class.java)
             startActivity(intent)
             finish()
         }

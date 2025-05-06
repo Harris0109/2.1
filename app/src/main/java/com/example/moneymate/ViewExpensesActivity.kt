@@ -12,16 +12,19 @@ class ViewExpensesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_expenses) // <-- must match your XML file name
 
-        val backArrow: ImageView = findViewById(R.id.backArrow)
-        val logout: TextView = findViewById(R.id.logout)
-
+        // Back arrow returns to dashboard
+        val backArrow = findViewById<ImageView>(R.id.backArrow)
         backArrow.setOnClickListener {
+            val intent = Intent(this, BudgetActivity::class.java)
+            startActivity(intent)
             finish()
         }
 
+
+        // Back arrow returns to Main
+        val logout = findViewById<TextView>(R.id.logout)
         logout.setOnClickListener {
-            // Redirect to login or welcome screen
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }

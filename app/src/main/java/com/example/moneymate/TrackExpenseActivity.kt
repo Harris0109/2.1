@@ -17,14 +17,8 @@ class TrackExpenseActivity : AppCompatActivity() {
         val dateInput = findViewById<EditText>(R.id.dateInput)
         val startTimeInput = findViewById<EditText>(R.id.startTimeInput)
         val endTimeInput = findViewById<EditText>(R.id.endTimeInput)
-        val backArrow = findViewById<ImageView>(R.id.backArrow)
 
-        // Back navigation
-        backArrow.setOnClickListener {
-            val intent = Intent(this, BudgetActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+
 
         // Date Picker
         dateInput.setOnClickListener {
@@ -64,6 +58,23 @@ class TrackExpenseActivity : AppCompatActivity() {
         submitBtn.setOnClickListener {
             Toast.makeText(this, "Expense submitted!", Toast.LENGTH_SHORT).show()
             // You can store or send the data here
+        }
+
+        // Back arrow returns to dashboard
+        val backArrow = findViewById<ImageView>(R.id.backArrow)
+        backArrow.setOnClickListener {
+            val intent = Intent(this, BudgetActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+
+        // Back arrow returns to Main
+        val logout = findViewById<TextView>(R.id.logout)
+        logout.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

@@ -30,6 +30,7 @@
             android:layout_height="1dp" />
 
         <TextView
+            android:id="@+id/logout"
             android:text="Log out"
             android:textColor="#007AFF"
             android:textStyle="bold"

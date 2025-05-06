@@ -13,34 +13,33 @@
         android:theme="@style/Theme.MoneyMate"
         tools:targetApi="31">
 
-        <activty
+        <activity
             android:name=".BudgetActivity"
             android:exported="false" />
         <activity android:name=".WelcomeActivity" />
-
-        <activty
+        <activity
             android:name=".SignUpActivity"
             android:exported="false" />
-        <activty
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
-        <activty
+        <activity
             android:name=".ViewExpensesActivity"
             android:exported="false" />
-        <activty android:name=".CreateCategoryActivity" />
-        <activty android:name=".TrackExpenseActivity" />
-        <activty android:name=".GoalsActivity" />
-        <activty android:name=".CategorySummaryActivity" />
-        <activty
+        <activity android:name=".CreateCategoryActivity" />
+        <activity android:name=".TrackExpenseActivity" />
+        <activity android:name=".GoalsActivity" />
+        <activity android:name=".CategorySummaryActivity" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="true">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
     </application>
 
 </manifest>
