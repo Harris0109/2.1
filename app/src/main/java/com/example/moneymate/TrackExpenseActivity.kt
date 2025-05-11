@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import java.util.*
 
 class TrackExpenseActivity : AppCompatActivity() {
+    //Database Connector
+    val dbHelper = DatabaseHelper(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_track_expense)
@@ -53,12 +56,25 @@ class TrackExpenseActivity : AppCompatActivity() {
             Toast.makeText(this, "Upload functionality coming soon!", Toast.LENGTH_SHORT).show()
         }
 
-        // Submit Button
+        // Submit Button, Save to database
         val submitBtn = findViewById<Button>(R.id.submitExpenseButton)
         submitBtn.setOnClickListener {
-            Toast.makeText(this, "Expense submitted!", Toast.LENGTH_SHORT).show()
-            // You can store or send the data here
+            val date = dateInput.text.toString()
+            val startTime = startTimeInput.text.toString()
+            val endTime = endTimeInput.text.toString()
+
+            if (date.isNotEmpty() && startTime.isNotEmpty() && endTime.isNotEmpty()) {
+                val result = dbHelper.insertExpense(date, startTime, endTime)
+                if (result != -1L) {
+                    Toast.makeText(this, "Expense submitted successfully!", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Failed to submit expense.", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "Please fill in all fields.", Toast.LENGTH_SHORT).show()
+            }
         }
+
 
         // Back arrow returns to dashboard
         val backArrow = findViewById<ImageView>(R.id.backArrow)

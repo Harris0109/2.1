@@ -17,11 +17,29 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         private const val COLUMN_NAME = "name"
         private const val COLUMN_EMAIL = "email"
         private const val COLUMN_PASSWORD = "password"
+        private const val TABLE_EXPENSES = "expenses"
+        private const val COLUMN_EXPENSE_ID = "id"
+        private const val COLUMN_DATE = "date"
+        private const val COLUMN_START_TIME = "start_time"
+        private const val COLUMN_END_TIME = "end_time"
+
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val CREATE_USERS_TABLE = "CREATE TABLE $TABLE_USERS ($COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, $COLUMN_NAME TEXT, $COLUMN_EMAIL TEXT, $COLUMN_PASSWORD TEXT)"
+        //SignUp/Login Table
+        val CREATE_USERS_TABLE = "CREATE TABLE $TABLE_USERS " +
+                "($COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "$COLUMN_NAME TEXT, $COLUMN_EMAIL TEXT, " +
+                "$COLUMN_PASSWORD TEXT)"
         db?.execSQL(CREATE_USERS_TABLE)
+       //Expense Table
+        val CREATE_EXPENSES_TABLE = "CREATE TABLE $TABLE_EXPENSES (" +
+                "$COLUMN_EXPENSE_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "$COLUMN_DATE TEXT, " +
+                "$COLUMN_START_TIME TEXT, " +
+                "$COLUMN_END_TIME TEXT)"
+        db?.execSQL(CREATE_EXPENSES_TABLE)
+
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -39,6 +57,17 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         return db.insert(TABLE_USERS, null, values)
     }
+//Insert Expense into database table
+    fun insertExpense(date: String, startTime: String, endTime: String): Long {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_DATE, date)
+            put(COLUMN_START_TIME, startTime)
+            put(COLUMN_END_TIME, endTime)
+        }
+        return db.insert(TABLE_EXPENSES, null, values)
+    }
+
 
     // Get user based on email and password
     fun getUser(email: String, password: String): Cursor? {
