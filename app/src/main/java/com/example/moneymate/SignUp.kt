@@ -18,6 +18,9 @@ class SignUpActivity : AppCompatActivity() {
         val signupButton = findViewById<Button>(R.id.signupButton)
         val loginText = findViewById<TextView>(R.id.loginText)
 
+        // Create an instance of DatabaseHelper
+        val dbHelper = DatabaseHelper(this)
+
         signupButton.setOnClickListener {
             val name = nameInput.text.toString().trim()
             val email = emailInput.text.toString().trim()
@@ -29,13 +32,20 @@ class SignUpActivity : AppCompatActivity() {
             } else if (password != confirmPassword) {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Sign Up Successful", Toast.LENGTH_SHORT).show()
-                // Redirect to Main Activity or Login
-                val intent = Intent(this, WelcomeActivity::class.java)
-                intent.putExtra("user_name", name) // send the name entered during signup
-                startActivity(intent)
-                finish()
+                // Insert the user into the database
+                val result = dbHelper.insertUser(name, email, password)
 
+                if (result != -1L) {
+                    Toast.makeText(this, "Sign Up Successful", Toast.LENGTH_SHORT).show()
+
+                    // Redirect to Welcome Activity with the user's name
+                    val intent = Intent(this, WelcomeActivity::class.java)
+                    intent.putExtra("user_name", name)  // Send the name entered during signup
+                    startActivity(intent)
+                    finish()
+                } else {
+                    Toast.makeText(this, "Error signing up", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
