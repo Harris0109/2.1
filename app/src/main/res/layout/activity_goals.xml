@@ -92,7 +92,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Maximum Amount"
+            android:text="Target Amount"
             android:textSize="18sp"
             android:layout_marginTop="24dp" />
 
@@ -100,7 +100,7 @@
             android:id="@+id/maxAmount"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="Enter the max amount"
+            android:hint="Enter the target amount"
             android:inputType="number"
             android:background="@drawable/input_bg"
             android:padding="12dp" />
@@ -109,7 +109,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Minimum Amount"
+            android:text="Saved Already"
             android:textSize="18sp"
             android:layout_marginTop="24dp" />
 
@@ -117,7 +117,7 @@
             android:id="@+id/minAmount"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="Enter the min amount"
+            android:hint="Enter the saved amount"
             android:inputType="number"
             android:background="@drawable/input_bg"
             android:padding="12dp" />
@@ -127,12 +127,12 @@
             android:id="@+id/addGoalsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/button_bg"
             android:backgroundTint="#3366FF"
             android:text="ADD GOALS"
-            android:textStyle="bold"
             android:textColor="#FFFFFF"
-            android:layout_marginTop="36dp"
-            android:background="@drawable/button_bg" />
+            android:textStyle="bold" />
 
 
     </LinearLayout>
