@@ -1,105 +1,85 @@
 package com.example.moneymate
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import java.util.*
 
 class TrackExpenseActivity : AppCompatActivity() {
+
+    private lateinit var expenseNameEditText: EditText
+    private lateinit var expenseAmountEditText: EditText
+    private lateinit var expenseDateEditText: EditText
+    private lateinit var addExpenseButton: Button
+    private lateinit var expenseListView: ListView
+
+    private val expenseList = mutableListOf<String>()
+    private lateinit var adapter: ArrayAdapter<String>
     private lateinit var dbHelper: DatabaseHelper
-    private val IMAGE_PICK_CODE = 1001
-    private var selectedSlipUri: String? = null
+
+    private var categoryId: Long = 1L // Replace with dynamic ID if needed
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_track_expense)
 
+        expenseNameEditText = findViewById(R.id.expenseNameEditText)
+        expenseAmountEditText = findViewById(R.id.expenseAmountEditText)
+        expenseDateEditText = findViewById(R.id.expenseDateEditText)
+        addExpenseButton = findViewById(R.id.addExpenseButton)
+        expenseListView = findViewById(R.id.expenseListView)
+
         dbHelper = DatabaseHelper(this)
 
-        val dateInput = findViewById<EditText>(R.id.dateInput)
-        val startTimeInput = findViewById<EditText>(R.id.startTimeInput)
-        val endTimeInput = findViewById<EditText>(R.id.endTimeInput)
-        val uploadButton = findViewById<Button>(R.id.uploadSlipButton)
-        val submitBtn = findViewById<Button>(R.id.submitExpenseButton)
-        val backArrow = findViewById<ImageView>(R.id.backArrow)
-        val logout = findViewById<TextView>(R.id.logout)
+        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, expenseList)
+        expenseListView.adapter = adapter
 
-        // Date Picker
-        dateInput.setOnClickListener {
-            val c = Calendar.getInstance()
-            val year = c.get(Calendar.YEAR)
-            val month = c.get(Calendar.MONTH)
-            val day = c.get(Calendar.DAY_OF_MONTH)
+        loadExpensesFromDatabase()
 
-            val dpd = DatePickerDialog(this, { _, y, m, d ->
-                dateInput.setText("$d/${m + 1}/$y")
-            }, year, month, day)
-            dpd.show()
-        }
+        addExpenseButton.setOnClickListener {
+            val name = expenseNameEditText.text.toString().trim()
+            val amountStr = expenseAmountEditText.text.toString().trim()
+            val date = expenseDateEditText.text.toString().trim()
 
-        // Time Pickers
-        fun showTimePicker(editText: EditText) {
-            val c = Calendar.getInstance()
-            val hour = c.get(Calendar.HOUR_OF_DAY)
-            val minute = c.get(Calendar.MINUTE)
-
-            TimePickerDialog(this, { _, h, m ->
-                editText.setText(String.format("%02d:%02d", h, m))
-            }, hour, minute, true).show()
-        }
-
-        startTimeInput.setOnClickListener { showTimePicker(startTimeInput) }
-        endTimeInput.setOnClickListener { showTimePicker(endTimeInput) }
-
-        // Upload Slip
-        uploadButton.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            startActivityForResult(intent, IMAGE_PICK_CODE)
-        }
-
-        // Submit Button
-        submitBtn.setOnClickListener {
-            val date = dateInput.text.toString()
-            val startTime = startTimeInput.text.toString()
-            val endTime = endTimeInput.text.toString()
-
-            if (date.isNotEmpty() && startTime.isNotEmpty() && endTime.isNotEmpty()) {
-                val result = dbHelper.insertExpense(date, startTime, endTime, selectedSlipUri)
-                if (result != -1L) {
-                    Toast.makeText(this, "Expense submitted successfully!", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "Failed to submit expense.", Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                Toast.makeText(this, "Please fill in all fields.", Toast.LENGTH_SHORT).show()
+            if (name.isEmpty() || amountStr.isEmpty() || date.isEmpty()) {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
-        }
 
-        // Navigation
-        backArrow.setOnClickListener {
-            val intent = Intent(this, BudgetActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+            val amount = amountStr.toDoubleOrNull()
+            if (amount == null) {
+                Toast.makeText(this, "Enter a valid number for amount", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-        logout.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            val result = dbHelper.insertExpense(name, amount, date, categoryId)
+            if (result != -1L) {
+                val expenseItem = "$date - $name: R$amount"
+                expenseList.add(expenseItem)
+                adapter.notifyDataSetChanged()
+
+                expenseNameEditText.text.clear()
+                expenseAmountEditText.text.clear()
+                expenseDateEditText.text.clear()
+
+                Toast.makeText(this, "Expense saved", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Failed to save expense", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == IMAGE_PICK_CODE && resultCode == RESULT_OK && data != null) {
-            val imageUri: Uri? = data.data
-            selectedSlipUri = imageUri.toString()
-            Toast.makeText(this, "Slip selected!", Toast.LENGTH_SHORT).show()
+    private fun loadExpensesFromDatabase() {
+        val cursor = dbHelper.getExpensesForCategory(categoryId)
+        if (cursor.moveToFirst()) {
+            do {
+                val name = cursor.getString(cursor.getColumnIndexOrThrow("expense_name"))
+                val amount = cursor.getDouble(cursor.getColumnIndexOrThrow("expense_amount"))
+                val date = cursor.getString(cursor.getColumnIndexOrThrow("expense_date"))
+                val expenseItem = "$date - $name: R$amount"
+                expenseList.add(expenseItem)
+            } while (cursor.moveToNext())
         }
+        cursor.close()
+        adapter.notifyDataSetChanged()
     }
 }

@@ -2,31 +2,39 @@ package com.example.moneymate
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 class ViewExpensesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_view_expenses) // <-- must match your XML file name
+        setContentView(R.layout.activity_view_expenses) // <-- match with your XML file name
 
-        // Back arrow returns to dashboard
-        val backArrow = findViewById<ImageView>(R.id.backArrow)
+        val backArrow: Button = findViewById(R.id.backArrow)
+        val logout: TextView = findViewById(R.id.logout)
+        val expenseListView: ListView = findViewById(R.id.expenseListView)
+
+        val expenseList = mutableListOf<String>()
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, expenseList)
+        expenseListView.adapter = adapter
+
+        // Clear any pre-existing data (if needed)
+        expenseList.clear()
+        adapter.notifyDataSetChanged()
+
+        // Set up Back Arrow click listener
         backArrow.setOnClickListener {
-            val intent = Intent(this, BudgetActivity::class.java)
+            val intent = Intent(this, BudgetActivity::class.java) // Navigate to BudgetActivity
             startActivity(intent)
-            finish()
+            finish() // Optional: Finish current activity to prevent going back to ViewExpensesActivity
         }
 
-
-        // Back arrow returns to Main
-        val logout = findViewById<TextView>(R.id.logout)
+        // Set up Logout click listener
         logout.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            finish()
+            finish() // Finish this activity to prevent going back to ViewExpensesActivity
         }
     }
 }

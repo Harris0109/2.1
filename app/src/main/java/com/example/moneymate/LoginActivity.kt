@@ -1,10 +1,10 @@
 package com.example.moneymate
 
 import android.content.Intent
+import android.database.Cursor
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import android.database.Cursor
 
 class LoginActivity : AppCompatActivity() {
 
@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
 
                     // Redirect to Welcome Activity with the user's email
                     val intent = Intent(this, WelcomeActivity::class.java)
-                    intent.putExtra("user_name", email)
+                    intent.putExtra("user_name", email)  // Passing email as user name for now
                     startActivity(intent)
                     finish()
                 } else {
@@ -54,6 +54,9 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
+
+                // Close cursor after use to prevent memory leaks
+                cursor?.close()
             }
         }
     }

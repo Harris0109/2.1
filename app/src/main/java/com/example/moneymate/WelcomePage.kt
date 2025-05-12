@@ -15,15 +15,19 @@ class WelcomeActivity : AppCompatActivity() {
         val welcomeText = findViewById<TextView>(R.id.welcomeText)
         val okButton = findViewById<Button>(R.id.okButton)
 
-        // Optional: get the user name from previous screen
-        val userName = intent.getStringExtra("user_name") ?: "User"
+        // Get the user name from the previous screen or use "User" as fallback if not provided
+        val userName = intent.getStringExtra("user_name").orEmpty().takeIf { it.isNotBlank() } ?: "User"
+
+        // Set the welcome message
         welcomeText.text = "Welcome to Money Mate, $userName"
 
+        // Set the action for the OK button
         okButton.setOnClickListener {
-            // Navigate to the main budget app screen
-            val intent = Intent(this, BudgetActivity::class.java) // or MainActivity
+            // Navigate to BudgetActivity and pass the user name
+            val intent = Intent(this, BudgetActivity::class.java)
+            intent.putExtra("user_name", userName) // Pass the name to the next activity
             startActivity(intent)
-            finish()
+            finish() // Close WelcomeActivity to prevent the user from going back to it
         }
     }
 }

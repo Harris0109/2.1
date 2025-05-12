@@ -27,10 +27,15 @@ class SignUpActivity : AppCompatActivity() {
             val password = passwordInput.text.toString().trim()
             val confirmPassword = confirmPasswordInput.text.toString().trim()
 
+            // Validate input fields
             if (name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+            } else if (!isValidEmail(email)) {
+                Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show()
             } else if (password != confirmPassword) {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
+            } else if (password.length < 6) {
+                Toast.makeText(this, "Password must be at least 6 characters long", Toast.LENGTH_SHORT).show()
             } else {
                 // Insert the user into the database
                 val result = dbHelper.insertUser(name, email, password)
@@ -53,5 +58,10 @@ class SignUpActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+    }
+
+    // Function to validate email format
+    private fun isValidEmail(email: String): Boolean {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 }

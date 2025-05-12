@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 class GoalsActivity : AppCompatActivity() {
 
@@ -15,49 +14,50 @@ class GoalsActivity : AppCompatActivity() {
     private lateinit var maxAmountEditText: EditText
     private lateinit var minAmountEditText: EditText
     private lateinit var addGoalsButton: Button
-
-
+    private lateinit var backArrow: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_goals)  // Make sure this matches your XML file name
+        setContentView(R.layout.activity_goals)
 
-        // Link views with their IDs
-        goalNameEditText = findViewById(R.id.goalName)
+        // Bind views
+        goalNameEditText  = findViewById(R.id.goalName)
         maxAmountEditText = findViewById(R.id.maxAmount)
         minAmountEditText = findViewById(R.id.minAmount)
-        addGoalsButton = findViewById(R.id.addGoalsButton)
+        addGoalsButton    = findViewById(R.id.addGoalsButton)
+        backArrow         = findViewById(R.id.backArrow)
 
-
-        // Add Goals button logic
+        // Save goals logic
         addGoalsButton.setOnClickListener {
-            val goalName = goalNameEditText.text.toString()
-            val maxAmount = maxAmountEditText.text.toString()
-            val minAmount = minAmountEditText.text.toString()
+            val goalName  = goalNameEditText.text.toString().trim()
+            val maxAmount = maxAmountEditText.text.toString().trim()
+            val minAmount = minAmountEditText.text.toString().trim()
 
             if (goalName.isEmpty() || maxAmount.isEmpty() || minAmount.isEmpty()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
+                // Save the goal to SharedPreferences
+                val sharedPrefs = getSharedPreferences("categories", MODE_PRIVATE)
+                val editor = sharedPrefs.edit()
+                val savedGoals = sharedPrefs.getString("goals", "")
+                val updatedGoals = if (!savedGoals.isNullOrEmpty()) {
+                    "$savedGoals|||$goalName"
+                } else {
+                    goalName
+                }
+                editor.putString("goals", updatedGoals)
+                editor.apply()
+
                 Toast.makeText(this, "Goals saved successfully!", Toast.LENGTH_SHORT).show()
-                // Optional: Save to DB or pass to another activity here
-                finish() // Go back to dashboard
+                finish() // Return to CategorySummaryActivity
             }
         }
 
-        // Back arrow returns to dashboard
-        val backArrow = findViewById<ImageView>(R.id.backArrow)
+        // Navigate back to CategorySummaryActivity
         backArrow.setOnClickListener {
-            val intent = Intent(this, BudgetActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        // Back arrow returns to Main
-        val logout = findViewById<TextView>(R.id.logout)
-        logout.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, CategorySummaryActivity::class.java))
             finish()
         }
     }
 }
+
