@@ -1,85 +1,76 @@
 package com.example.moneymate
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import java.util.*
 
 class TrackExpenseActivity : AppCompatActivity() {
-
-    private lateinit var expenseNameEditText: EditText
-    private lateinit var expenseAmountEditText: EditText
-    private lateinit var expenseDateEditText: EditText
-    private lateinit var addExpenseButton: Button
-    private lateinit var expenseListView: ListView
-
-    private val expenseList = mutableListOf<String>()
-    private lateinit var adapter: ArrayAdapter<String>
-    private lateinit var dbHelper: DatabaseHelper
-
-    private var categoryId: Long = 1L // Replace with dynamic ID if needed
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_track_expense)
 
-        expenseNameEditText = findViewById(R.id.expenseNameEditText)
-        expenseAmountEditText = findViewById(R.id.expenseAmountEditText)
-        expenseDateEditText = findViewById(R.id.expenseDateEditText)
-        addExpenseButton = findViewById(R.id.addExpenseButton)
-        expenseListView = findViewById(R.id.expenseListView)
+        val dateInput = findViewById<EditText>(R.id.dateInput)
+        val startTimeInput = findViewById<EditText>(R.id.startTimeInput)
+        val endTimeInput = findViewById<EditText>(R.id.endTimeInput)
+        val backArrow = findViewById<ImageView>(R.id.backArrow)
 
-        dbHelper = DatabaseHelper(this)
+        backArrow.setOnClickListener {
+            val intent = Intent(this, BudgetActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, expenseList)
-        expenseListView.adapter = adapter
+        dateInput.setOnClickListener { showDatePicker(dateInput) }
+        startTimeInput.setOnClickListener { showTimePicker(startTimeInput) }
+        endTimeInput.setOnClickListener { showTimePicker(endTimeInput) }
 
-        loadExpensesFromDatabase()
+        val uploadButton = findViewById<Button>(R.id.uploadSlipButton)
+        uploadButton.setOnClickListener {
+            Toast.makeText(this, "Upload functionality coming soon!", Toast.LENGTH_SHORT).show()
+        }
 
-        addExpenseButton.setOnClickListener {
-            val name = expenseNameEditText.text.toString().trim()
-            val amountStr = expenseAmountEditText.text.toString().trim()
-            val date = expenseDateEditText.text.toString().trim()
+        val submitBtn = findViewById<Button>(R.id.submitExpenseButton)
+        submitBtn.setOnClickListener {
+            Toast.makeText(this, "Expense submitted!", Toast.LENGTH_SHORT).show()
 
-            if (name.isEmpty() || amountStr.isEmpty() || date.isEmpty()) {
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+            val prefs = getSharedPreferences("com.example.moneymate", MODE_PRIVATE)
+            val expenseCount = prefs.getInt("expense_count", 0) + 1
+            prefs.edit().putInt("expense_count", expenseCount).apply()
 
-            val amount = amountStr.toDoubleOrNull()
-            if (amount == null) {
-                Toast.makeText(this, "Enter a valid number for amount", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            val result = dbHelper.insertExpense(name, amount, date, categoryId)
-            if (result != -1L) {
-                val expenseItem = "$date - $name: R$amount"
-                expenseList.add(expenseItem)
-                adapter.notifyDataSetChanged()
-
-                expenseNameEditText.text.clear()
-                expenseAmountEditText.text.clear()
-                expenseDateEditText.text.clear()
-
-                Toast.makeText(this, "Expense saved", Toast.LENGTH_SHORT).show()
+            if (expenseCount % 5 == 0) { // Every 5th expense
+                val intent = Intent(this, RewardActivity::class.java)
+                startActivity(intent)
             } else {
-                Toast.makeText(this, "Failed to save expense", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, BudgetActivity::class.java)
+                startActivity(intent)
             }
+            finish()
         }
     }
 
-    private fun loadExpensesFromDatabase() {
-        val cursor = dbHelper.getExpensesForCategory(categoryId)
-        if (cursor.moveToFirst()) {
-            do {
-                val name = cursor.getString(cursor.getColumnIndexOrThrow("expense_name"))
-                val amount = cursor.getDouble(cursor.getColumnIndexOrThrow("expense_amount"))
-                val date = cursor.getString(cursor.getColumnIndexOrThrow("expense_date"))
-                val expenseItem = "$date - $name: R$amount"
-                expenseList.add(expenseItem)
-            } while (cursor.moveToNext())
-        }
-        cursor.close()
-        adapter.notifyDataSetChanged()
+    private fun showDatePicker(editText: EditText) {
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+
+        DatePickerDialog(this, { _, y, m, d ->
+            editText.setText("$d/${m + 1}/$y")
+        }, year, month, day).show()
+    }
+
+    private fun showTimePicker(editText: EditText) {
+        val c = Calendar.getInstance()
+        val hour = c.get(Calendar.HOUR_OF_DAY)
+        val minute = c.get(Calendar.MINUTE)
+
+        TimePickerDialog(this, { _, h, m ->
+            editText.setText(String.format("%02d:%02d", h, m))
+        }, hour, minute, true).show()
     }
 }
