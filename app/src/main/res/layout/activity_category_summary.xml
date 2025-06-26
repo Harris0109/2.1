@@ -87,4 +87,17 @@
             android:textSize="16sp" />
 
     </LinearLayout>
+
+    <!-- Dynamic Category List -->
+    <LinearLayout
+        android:id="@+id/categoryContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="8dp">
+
+        <!-- Categories and Goals will be added dynamically here -->
+
+    </LinearLayout>
+
 </ScrollView>

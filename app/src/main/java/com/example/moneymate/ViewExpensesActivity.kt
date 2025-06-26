@@ -11,13 +11,13 @@ class ViewExpensesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_expenses) // <-- match with your XML file name
 
-        val backArrow: Button = findViewById(R.id.backArrow)
+        val backArrow: ImageView = findViewById(R.id.backArrow)
         val logout: TextView = findViewById(R.id.logout)
-        val expenseListView: ListView = findViewById(R.id.expenseListView)
+        //val expenseListView: ListView = findViewById(R.id.expenseListView)....expenseListView id doesn't exsist in xml
 
         val expenseList = mutableListOf<String>()
         val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, expenseList)
-        expenseListView.adapter = adapter
+        //expenseListView.adapter = adapter
 
         // Clear any pre-existing data (if needed)
         expenseList.clear()

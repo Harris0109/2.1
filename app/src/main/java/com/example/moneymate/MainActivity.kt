@@ -5,8 +5,6 @@ import android.content.Intent
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 
-
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

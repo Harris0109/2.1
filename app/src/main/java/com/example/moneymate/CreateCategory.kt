@@ -25,8 +25,8 @@ class CreateCategoryActivity : AppCompatActivity() {
         etCategoryName = findViewById(R.id.etCategoryName)
         etCategoryDescription = findViewById(R.id.etCategoryDescription)
         btnSaveCategory = findViewById(R.id.btnSaveCategory)
-        btnBack = findViewById(R.id.btnBack)
-        tvLogout = findViewById(R.id.tvLogout)
+        btnBack = findViewById(R.id.backArrow)
+        tvLogout = findViewById(R.id.logout)
 
         // Save button logic
         btnSaveCategory.setOnClickListener {
