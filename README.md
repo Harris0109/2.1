@@ -36,8 +36,11 @@ Examine a detailed list of your entered expenses.
 
 Category Summary:  
 Analyze a breakdown of expenses by category to gain insight into your spending patterns.
+User can view a graph that displays amount used per category saved.
 
 4. Adding Your Information  
 Each feature page will ask you to input relevant details.  
 
 Complete all essential fields to ensure your information is saved accurately.
+
+5. Gamification features
