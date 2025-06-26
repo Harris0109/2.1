@@ -44,4 +44,4 @@ Each feature page will ask you to input relevant details.
 Complete all essential fields to ensure your information is saved accurately.
 
 5. Gamification features
-   We've implemented gamification features like a questionnaire to gain insight on users saving habbits
+   We've implemented gamification features like a questionnaire to gain insight on users saving habbits. And reward feature where users earn rewards from saving.
