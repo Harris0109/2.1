@@ -15,9 +15,9 @@ class CategorySummaryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_category_summary)
 
         val backArrow: ImageView = findViewById(R.id.backArrow)
-        val logout: TextView = findViewById(R.id.tvLogout)
+        val logout: TextView = findViewById(R.id.logout)
         val placeholder: TextView = findViewById(R.id.placeholderMessage)
-        val categoryContainer: LinearLayout = findViewById(R.id.categoryContainer)
+
 
         // Set back button functionality
         backArrow.setOnClickListener { finish() }
@@ -45,8 +45,7 @@ class CategorySummaryActivity : AppCompatActivity() {
                 textView.text = item
                 textView.textSize = 16f
                 textView.setPadding(0, 10, 0, 10)
-                textView.setBackgroundResource(R.drawable.category_background)  // Optional: Add background to each category
-                categoryContainer.addView(textView)
+
             }
         }
 
@@ -61,8 +60,7 @@ class CategorySummaryActivity : AppCompatActivity() {
                 textView.text = goal
                 textView.textSize = 16f
                 textView.setPadding(0, 10, 0, 10)
-                textView.setBackgroundResource(R.drawable.goal_background)  // Optional: Add background to each goal
-                categoryContainer.addView(textView)
+
             }
         }
 
